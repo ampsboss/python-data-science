@@ -1,7 +1,7 @@
 from sklearn import tree, neighbors, linear_model
 
 # CHALLENGE - create 3 more classifiers...
-clfs = (neighbors.KNeighborsClassifier(n_neighbors=3), linear_model.LogisticRegression(), tree.DecisionTreeClassifier())
+classifiers = (neighbors.KNeighborsClassifier(n_neighbors=3), linear_model.LogisticRegression(), tree.DecisionTreeClassifier())
 
 # [height, weight, shoe_size]
 X = [[181, 80, 44], [177, 70, 43], [160, 60, 38], [154, 54, 37], [166, 65, 40],
@@ -17,7 +17,7 @@ correctAnswer = ['female', 'male', 'male']
 
 # CHALLENGE - ...and train them on our data
 predictions = []
-for method in clfs:
+for method in classifiers:
     clf = method
     clf = clf.fit(X, Y)
     predictions.append(clf.predict(testData))
