@@ -1,6 +1,8 @@
 import tweepy
 from textblob import TextBlob
 import configparser
+import csv
+
 
 config = configparser.ConfigParser()
 config.read('twitterConfig.ini')
@@ -20,7 +22,7 @@ api = tweepy.API(auth)
 # Step 3 - Retrieve Tweets
 while True:
     try:
-        query = input('Enter a query')
+        query = input('Enter a query: ')
         public_tweets = api.search(query,lang = 'en')
         break
     except tweepy.error.TweepError:
@@ -31,11 +33,17 @@ while True:
 # and label each one as either 'positive' or 'negative', depending on the sentiment
 # You can decide the sentiment polarity threshold yourself
 
-
+# Step 4 Perform Sentiment Analysis on Tweets
+data = []
 for tweet in public_tweets:
-    print(tweet.text)
-
-    # Step 4 Perform Sentiment Analysis on Tweets
     analysis = TextBlob(tweet.text)
-    print(analysis.sentiment)
-    print("")
+
+    if analysis.sentiment.polarity > 0.3:
+        data.append([tweet.text, 'positive'])
+    else:
+        data.append([tweet.text, 'nagative'])
+
+# Writing data to CSV file:
+with open('Twitter.csv', 'w', newline='') as f:
+    a = csv.writer(f, delimiter=',')
+    a.writerows(data)
