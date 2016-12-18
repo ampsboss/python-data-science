@@ -11,8 +11,10 @@ from lightfm import LightFM
 data = fetch_movielens(min_rating=4.0)
 
 # print training and testing data
-print(repr(data['train']))
-print(repr(data['test']))
+# print(repr(data['train']))
+# print(repr(data['test']))
+# print(repr(data))
+
 
 # CHALLENGE part 2 of 3 - use 3 different loss functions (so 3 different models), compare results, print results for
 # the best one. - Available loss functions are warp, logistic, bpr, and warp-kos.
